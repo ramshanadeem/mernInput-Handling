@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import { Header } from "./components";
+import { Boxes } from "./components/Styled";
+import { useState } from "react";
+import { CardData } from "./components/Data/CardsData";
+import BoxList from "./components/BoxList";
+import BoxItem from "./components/BoxItem";
+import BoxInput from "./components/BoxInput";
 function App() {
+  const [cardData, setCardData] = useState(CardData);
+  const deleteCard = (id) => {
+    console.log("App", id);
+    if (window.confirm("are you sure ")) {
+      setCardData(cardData.filter((item) => item.id !== id));
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <div style={{ marginLeft: "265px" }}>
+        {" "}
+        <BoxInput />
+      </div>
+
+      <div
+        style={{ marginLeft: "250px", marginTop: "50px", marginBottom: "10px" }}
+      >
+        <BoxList cardData={cardData} handleDelete={deleteCard} />
+      </div>
+    </>
   );
 }
 
